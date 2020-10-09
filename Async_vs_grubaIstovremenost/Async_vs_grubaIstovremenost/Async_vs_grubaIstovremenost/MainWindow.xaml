@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid Name="grid" RenderTransformOrigin="0.498,0.483">
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="300"/>
             <RowDefinition Height="100"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
