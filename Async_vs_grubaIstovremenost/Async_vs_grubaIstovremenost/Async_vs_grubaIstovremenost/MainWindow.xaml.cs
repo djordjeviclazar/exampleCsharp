@@ -90,7 +90,7 @@ namespace Async_vs_grubaIstovremenost
                         TextResult.Text += result + "primes between" + (i * 1_000_000) + "and" + (1_000_000 * (i + 1) - 1) +
                         Environment.NewLine));
             }
-            Dispatcher.BeginInvoke(new Action(() => { Brutal.IsEnabled = false; }));
+            Dispatcher.BeginInvoke(new Action(() => { Brutal.IsEnabled = true; }));
         }
 
         private int GetPrimesCount(int start, int count)
