@@ -1,0 +1,31 @@
+﻿<Window x:Class="Async_vs_grubaIstovremenost.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="800">
+    <Grid Name="grid" RenderTransformOrigin="0.498,0.483">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                 Name="TextResult" Margin="200, 30, 200, 30">
+        </TextBox>
+        <Button Grid.Row="2" Grid.Column="0" 
+                Name="Async" Margin="50, 20, 50, 20" Click="Async_Click">
+            Async
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" 
+          Name="Brutal" Margin="50, 20, 50, 20" Click="Brutal_Click">
+            Brutal
+        </Button>
+    </Grid>
+</Window>
