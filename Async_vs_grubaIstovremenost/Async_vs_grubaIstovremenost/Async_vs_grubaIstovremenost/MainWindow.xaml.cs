@@ -41,7 +41,21 @@ namespace Async_vs_grubaIstovremenost
             grid.Children.Add(c);
 
             timer.Interval = TimeSpan.FromMilliseconds(10);
-            timer.Tick += Timer_Tick;
+            //timer.Tick += Timer_Tick;
+            timer.Tick += delegate {
+                if (this.Width - c.Width > c.Margin.Left) // ovo je bolje da element bude na Canvas; Canvas.GetLeft(c)...
+                {
+                    Thickness t = c.Margin;
+                    t.Left += 10;
+                    c.Margin = t;
+                }
+                else
+                {
+                    Thickness t = c.Margin;
+                    t.Left = 0;
+                    c.Margin = t;
+                }
+            };
             timer.Start();
         }
 
