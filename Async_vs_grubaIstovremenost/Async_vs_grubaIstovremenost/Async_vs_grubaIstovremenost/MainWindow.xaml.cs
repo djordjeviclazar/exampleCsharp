@@ -29,15 +29,18 @@ namespace Async_vs_grubaIstovremenost
         {
             InitializeComponent();
 
+            ClearBtn.Click += ClearBtn_Click;
             timer = new DispatcherTimer();
 
-            c = new Button() { Height = 30, Width = 20, Name = "MainThread", Background = Brushes.Green};
+            c = new Button() { Height = 30, Width = 20, Name = "MainThread", Background = Brushes.Green, 
+                               HorizontalAlignment = HorizontalAlignment.Left};
             Grid.SetColumn(c, 0);
             Grid.SetRow(c, 0);
             Grid.SetColumnSpan(c, 2);
+
             grid.Children.Add(c);
 
-            timer.Interval = TimeSpan.FromMilliseconds(50);
+            timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Tick += Timer_Tick;
             timer.Start();
         }
@@ -47,7 +50,7 @@ namespace Async_vs_grubaIstovremenost
             if (this.Width - c.Width > c.Margin.Left) // ovo je bolje da element bude na Canvas; Canvas.GetLeft(c)...
             {
                 Thickness t = c.Margin;
-                t.Left += 30;
+                t.Left += 10;
                 c.Margin = t;
             }
             else
@@ -74,8 +77,9 @@ namespace Async_vs_grubaIstovremenost
 
             for (int i = 0; i < 5; i++)
             {
-                   TextResult.Text += await GetPrimesCountAsync(i * 1_000_000 + 2, 1_000_000) + "primes between" + 
-                   (i * 1_000_000) + "and" + (1_000_000 * (i + 1) - 1) + Environment.NewLine;
+                // await zaustavlja izvršenje GoAsync izvršava se samo GetPrimeCountAsync:
+                   TextResult.Text += await GetPrimesCountAsync(i * 1_000_000 + 2, 1_000_000) + " primes between " + 
+                   (i * 1_000_000) + " and " + (1_000_000 * (i + 1) - 1) + Environment.NewLine;
             }
 
             Async.IsEnabled = true;
@@ -85,9 +89,10 @@ namespace Async_vs_grubaIstovremenost
         {
             for (int i = 0; i < 5; i++)
             {
+                // for petlja se izvršava istovremeno kad i ispisivanje u TextBox (i se inkrementira)
                 int result = GetPrimesCount(i * 1_000_000 + 2, 1_000_000);
                 Dispatcher.BeginInvoke(new Action(() =>
-                        TextResult.Text += result + "primes between" + (i * 1_000_000) + "and" + (1_000_000 * (i + 1) - 1) +
+                        TextResult.Text += result + " primes between " + (i * 1_000_000) + " and " + (1_000_000 * (i + 1) - 1) +
                         Environment.NewLine));
             }
             Dispatcher.BeginInvoke(new Action(() => { Brutal.IsEnabled = true; }));
@@ -106,6 +111,10 @@ namespace Async_vs_grubaIstovremenost
                                                           .All(i => n % i > 0)));
         }
 
+        private void ClearBtn_Click(Object sender, EventArgs e)
+        {
+            TextResult.Text = "";
+        }
 
     }
 }
