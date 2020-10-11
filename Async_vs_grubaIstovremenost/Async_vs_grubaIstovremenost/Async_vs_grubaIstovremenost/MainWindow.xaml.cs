@@ -103,7 +103,9 @@ namespace Async_vs_grubaIstovremenost
         {
             for (int i = 0; i < 5; i++)
             {
-                // for petlja se izvršava istovremeno kad i ispisivanje u TextBox (i se inkrementira)
+                //int pom = i;
+                // ili da se prosledi kao arg. lambda f-ji
+                // for petlja se izvršava istovremeno kad i ispisivanje u TextBox (i se inkrementira):
                 int result = GetPrimesCount(i * 1_000_000 + 2, 1_000_000);
                 Dispatcher.BeginInvoke(new Action(() =>
                         TextResult.Text += result + " primes between " + (i * 1_000_000) + " and " + (1_000_000 * (i + 1) - 1) +
