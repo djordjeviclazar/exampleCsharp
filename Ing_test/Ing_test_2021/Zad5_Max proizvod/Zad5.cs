@@ -8,6 +8,10 @@ namespace Zad5_Max_proizvod
 {
     public class Test
     {
+        /*
+         * Score: 3/5
+         */
+
         public static void Main()
         {
             var inputString = Console.ReadLine();
@@ -18,9 +22,38 @@ namespace Zad5_Max_proizvod
                 numbers[i] = int.Parse(inputNumbers[i]);
             }
 
-            // your code goes here
+            int maxMul = numbers[0], currentMul = 1, nextMul; // brojevi -10-10
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                if(numbers[i] == 0)
+                {
+                    if (maxMul < 0) 
+                    { 
+                        maxMul = 0;
+                        
+                        
+                    }
+                    currentMul = 1;
+                    continue;
+                }
+                nextMul = currentMul * numbers[i];
+
+                if(nextMul < currentMul)
+                {
+                    if(currentMul > maxMul) { maxMul = currentMul; }
+
+                    currentMul = numbers[i];
+                }
+                else
+                {
+                    currentMul = nextMul;
+                    if(currentMul > maxMul) { maxMul = currentMul; }
+                }
+            }
+
             // print your results to the console using:
-            // Console.WriteLine(“your result here”);
+            Console.WriteLine(maxMul);
+            Console.ReadLine();
         }
     }
 
